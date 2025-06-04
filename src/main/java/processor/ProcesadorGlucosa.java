@@ -14,18 +14,21 @@ public class ProcesadorGlucosa implements Runnable {
 
     @Override
     public void run() {
+
         Random rand = new Random();
         int[] niveles = new int[10];
         int[] clasificados = new int[10];
 
         for (int i = 0; i < 10; i++) {
-            niveles[i] = 70 + rand.nextInt(121); // entre 70 y 190
+            //------AQUI HICIMOS LA GENERACIÓN DEL NUMERO ALEAATORIO--------
+            niveles[i] = 70 + rand.nextInt(121);
+
             clasificados[i] = Clasificador.clasificar(niveles[i]);
             ResultadosGlobales.agregarResultado(clasificados[i]);
         }
 
         String nombreHilo = Thread.currentThread().getName();
-        logger.info("[" + nombreHilo + "] Niveles:       " + Arrays.toString(niveles));
+        logger.info("[" + nombreHilo + "] Niveles de glucosa:       " + Arrays.toString(niveles));
         logger.info("[" + nombreHilo + "] Clasificación: " + Arrays.toString(clasificados));
     }
 }

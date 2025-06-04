@@ -25,13 +25,13 @@ public class ResultadosGlobales {
 
         int total = resultados.size();
         if (total == 0) {
-            logger.info("No hay resultados para mostrar.");
+            System.out.println("No hay resultados para mostrar..");
             return;
         }
 
-        logger.info("\nClasificación de resultados:");
-        logger.info(String.format("Normal: %.1f%%", normal * 100.0 / total));
-        logger.info(String.format("Prediabetes: %.1f%%", prediabetes * 100.0 / total));
-        logger.info(String.format("Diabetes: %.1f%%", diabetes * 100.0 / total));
+        System.out.println("\nClasificación de resultados:");
+        System.out.println(String.format("Normal: %.1f%%", normal * 100.0 / total));
+        System.out.printf("Prediabetes: %.1f%%", prediabetes * 100.0 / total);
+        System.out.println(String.format("\nDiabetes: %.1f%%", diabetes * 100.0 / total));
     }
 }
