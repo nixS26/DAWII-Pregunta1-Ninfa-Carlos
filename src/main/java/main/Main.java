@@ -1,23 +1,34 @@
 package main;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import service.GlucoseService;
+import processor.ProcesadorGlucosa;
+import util.ResultadosGlobales;
 
 public class Main {
-    private static final Logger logger = LoggerFactory.getLogger(Main.class);
-    public static void main(String[] args) {
-        logger.info("Iniciando aplicación de clasificación de glucosa");
 
-        try {
-            GlucoseService glucoseService = new GlucoseService();
-            glucoseService.processGlucoseClassification();
+    public static void main(String[] args) throws InterruptedException {
+        Thread h1 = new Thread(new ProcesadorGlucosa(), "Hilo-1");
+        Thread h2 = new Thread(new ProcesadorGlucosa(), "Hilo-2");
+        Thread h3 = new Thread(new ProcesadorGlucosa(), "Hilo-3");
 
-        } catch (Exception e) {
-            logger.error("Error fatal en la aplicación: ", e);
-            System.exit(1);
-        }
+        h1.start(); h2.start(); h3.start();
 
-        logger.info("Aplicación finalizada correctamente");
+        h1.join(); h2.join(); h3.join();
+
+        ResultadosGlobales.mostrarEstadisticas();
     }
+//    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+//    public static void main(String[] args) {
+//        logger.info("Iniciando aplicación de clasificación de glucosa");
+//
+//        try {
+//            GlucoseService glucoseService = new GlucoseService();
+//            glucoseService.processGlucoseClassification();
+//
+//        } catch (Exception e) {
+//            logger.error("Error fatal en la aplicación: ", e);
+//            System.exit(1);
+//        }
+//
+//        logger.info("Aplicación finalizada correctamente");
+//    }
 }
